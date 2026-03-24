@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --seal-cyan: #0088cc;
+  --seal-purple: #7b2ff7;
+  --seal-pink: #e0005a;
+  --seal-gold: #d4880a;
+  --seal-green: #00aa55;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #f0f2f5;
+  color: #1a1a2e;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #e8e8e8; }
+::-webkit-scrollbar-thumb { background: #bbb; border-radius: 3px; }
+
+@keyframes holoShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+  50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 136, 204, 0.15); }
+  50% { box-shadow: 0 0 30px rgba(0, 136, 204, 0.3), 0 0 60px rgba(123, 47, 247, 0.15); }
+}
+
+@keyframes borderRotate {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
