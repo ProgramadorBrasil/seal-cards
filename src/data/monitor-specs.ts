@@ -56,23 +56,33 @@ export interface MonitorData {
 import rawData from './rtings_monitors_2026.json'
 export const monitorData = rawData as MonitorData
 
-// ASIN map for affiliate links (Amazon US)
+// ASIN map for affiliate links (Amazon US) — todos os 25 monitores
 const asinMap: Record<number, string> = {
-  1: 'B0DPJ1VQ1G',   // ASUS ROG Swift OLED PG27UCDM
-  2: 'B0DS2QY2TZ',   // ASUS ProArt PA32QCV
-  3: 'B0D7GFXGX1',   // AOC Q27G3XMN
-  4: 'B0DSNWFQXS',   // LG 27GX790B-B
-  5: 'B0DSGTKTKT',   // ASUS ROG Strix XG32UCWMG
-  6: 'B0CZRSM542',   // Dell Alienware AW3425DW
-  8: 'B0DJGXHWRM',   // BenQ MOBIUZ EX321UX
-  9: 'B0D7B5LM33',   // Samsung Odyssey OLED G6
-  10: 'B0D9BMNJ6P',  // Dell Alienware AW3225QF
-  11: 'B0DRF4F9R3',  // MSI MPG 271QRX
-  13: 'B0D65HJM3Y',  // Dell Alienware AW2725DF
-  17: 'B0DPJ1MM4T',  // ASUS ROG Swift OLED PG32UCDM
-  21: 'B0CX55H10V',  // ASUS ROG Strix XG27ACS
-  24: 'B0DRF6R1TP',  // MSI MPG 321URX
-  25: 'B0CPFPQX5J',  // LG 27GS95QE-B
+  1: 'B0DM6SHQTN',   // ASUS ROG Swift OLED PG27UCDM
+  2: 'B0F23LR6JQ',   // ASUS ProArt PA32QCV
+  3: 'B0C8ZJKPWC',   // AOC Q27G3XMN
+  4: 'B0G5R2QK24',   // LG 27GX790B-B
+  5: 'B0F732KMQQ',   // ASUS ROG Strix XG32UCWMG
+  6: 'B0F6724X5N',   // Dell Alienware AW3425DW
+  7: 'B0C8ZNPRWW',   // Acer Nitro XV275K
+  8: 'B0D2LXLN75',   // BenQ MOBIUZ EX321UX
+  9: 'B0D1DPFZLZ',   // Samsung Odyssey OLED G6
+  10: 'B0F2VTSSRY',  // Dell Alienware AW3225QF
+  11: 'B0CTS1RQ6Y',  // MSI MPG 271QRX
+  12: 'B0G631LBJT',  // Gigabyte MO27Q28G
+  13: 'B0CZSGWLD5',  // Dell Alienware AW2725DF
+  14: 'B0FB46P6F6',  // Dell S3225QC
+  15: 'B0FM7X82CM',  // Dell U2725QE
+  16: 'B0D1TX35MQ',  // Dell U4025QW
+  17: 'B0CV26XVMD',  // ASUS ROG Swift OLED PG32UCDM
+  18: 'B0D7NSZRJW',  // ASUS ROG Strix XG27ACDNG
+  19: 'B0CZWM44QP',  // ASUS ROG Strix XG27AQDMG
+  20: 'B0FNKZWW5H',  // AOC Q27G40XMN
+  21: 'B0CV24GQ9W',  // ASUS ROG Strix XG27ACS
+  22: 'B0DBYPQY8F',  // Xiaomi G Pro 27i
+  23: 'B0DMPTN8DG',  // LG 27GX790A-B
+  24: 'B0CTSC3VS4',  // MSI MPG 321URX
+  25: 'B0CSGWXVBN',  // LG 27GS95QE-B
 }
 
 // EAN/GTIN-13 map
