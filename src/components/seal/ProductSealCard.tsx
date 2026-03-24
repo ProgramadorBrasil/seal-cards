@@ -43,9 +43,8 @@ export default function ProductSealCard({ monitor, index }: Props) {
     mouseY.set(0.5)
   }, [mouseX, mouseY])
 
-  // Primeira metade dos indices (frente) e segunda metade (verso)
-  const frontIndices = specIndices.slice(0, 9)
-  const backIndices = specIndices.slice(9)
+  // Todos os índices na frente, verso mostra scores detalhados
+  const allIndices = specIndices
 
   return (
     <motion.div
@@ -53,11 +52,11 @@ export default function ProductSealCard({ monitor, index }: Props) {
       style={{ perspective: 1200 }}
       initial={{ opacity: 0, y: 60, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: index * 0.08, duration: 0.6, ease: 'easeOut' }}
+      transition={{ delay: index * 0.05, duration: 0.5, ease: 'easeOut' }}
     >
       <motion.div
         ref={cardRef}
-        className="relative w-[400px] h-[620px] cursor-pointer"
+        className="relative w-[400px] h-[640px] cursor-pointer"
         style={{
           transformStyle: 'preserve-3d',
           rotateX: isFlipped ? 0 : rotateX,
@@ -144,17 +143,17 @@ export default function ProductSealCard({ monitor, index }: Props) {
               </div>
             </div>
 
-            {/* 9 índices com barras A-G PROCEL */}
-            <div className="px-6 py-3 flex-1 overflow-hidden">
-              <div className="space-y-2">
-                {frontIndices.map((idx, i) => (
+            {/* Todos os 18 índices com barras A-G PROCEL */}
+            <div className="px-6 py-2">
+              <div className="space-y-[5px]">
+                {allIndices.map((idx, i) => (
                   <SpecEnergyBar
                     key={idx.label}
                     icon={idx.icon}
                     label={idx.label}
                     grade={idx.grade}
                     detail={idx.detail}
-                    delay={index * 0.05 + 0.3 + i * 0.06}
+                    delay={0.1 + i * 0.025}
                   />
                 ))}
               </div>
@@ -243,9 +242,9 @@ export default function ProductSealCard({ monitor, index }: Props) {
           <div className="absolute inset-0 rounded-xl" style={{ border: `2px solid ${cfg.border}20` }} />
 
           <div className="relative z-10 h-full flex flex-col p-4">
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-3">
               <h3
-                className="text-xs tracking-[2px] uppercase"
+                className="text-sm tracking-[2px] uppercase"
                 style={{
                   fontFamily: 'Orbitron',
                   fontWeight: 700,
@@ -254,25 +253,54 @@ export default function ProductSealCard({ monitor, index }: Props) {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                + Índices
+                Pontuação
               </h3>
-              <span className="text-[0.55rem] text-gray-500 font-bold" style={{ fontFamily: 'Space Grotesk' }}>
-                {monitor.name.replace(monitor.brand, '').trim()}
-              </span>
+              <ScoreRing score={seal.overall} color={seal.verdictColor} size={65} label="NOTA" />
             </div>
 
-            {/* Restante dos 9 índices */}
-            <div className="space-y-2 flex-1">
-              {backIndices.map((idx, i) => (
-                <SpecEnergyBar
-                  key={idx.label}
-                  icon={idx.icon}
-                  label={idx.label}
-                  grade={idx.grade}
-                  detail={idx.detail}
-                  delay={i * 0.06}
-                />
-              ))}
+            {/* Detalhes do monitor */}
+            <div className="space-y-1.5 flex-1">
+              <div className="text-[0.55rem] text-gray-600 font-bold" style={{ fontFamily: 'Space Grotesk' }}>
+                {monitor.name}
+              </div>
+              <div className="text-[0.45rem] text-gray-400" style={{ fontFamily: 'Rajdhani' }}>
+                {monitor.specs.resolution_name} · {monitor.specs.refresh_rate_hz}Hz · {monitor.specs.panel_type} · {monitor.size_inches}"
+              </div>
+              {monitor.ean && (
+                <div className="text-[0.4rem] text-gray-300 font-mono mt-1">
+                  EAN: {monitor.ean}
+                </div>
+              )}
+
+              <div className="mt-3 pt-2" style={{ borderTop: '1px solid #f0f0f0' }}>
+                <div className="text-[0.45rem] text-gray-400 font-bold tracking-[2px] uppercase mb-1.5"
+                  style={{ fontFamily: 'Rajdhani' }}>
+                  Conectividade
+                </div>
+                <div className="text-[0.5rem] text-gray-600 leading-relaxed" style={{ fontFamily: 'Space Grotesk' }}>
+                  {monitor.specs.connectivity}
+                </div>
+              </div>
+
+              <div className="mt-2 pt-2" style={{ borderTop: '1px solid #f0f0f0' }}>
+                <div className="text-[0.45rem] text-gray-400 font-bold tracking-[2px] uppercase mb-1.5"
+                  style={{ fontFamily: 'Rajdhani' }}>
+                  Ergonomia
+                </div>
+                <div className="text-[0.5rem] text-gray-600" style={{ fontFamily: 'Space Grotesk' }}>
+                  {monitor.specs.ergonomics}
+                </div>
+              </div>
+
+              <div className="mt-2 pt-2" style={{ borderTop: '1px solid #f0f0f0' }}>
+                <div className="text-[0.45rem] text-gray-400 font-bold tracking-[2px] uppercase mb-1.5"
+                  style={{ fontFamily: 'Rajdhani' }}>
+                  HDR
+                </div>
+                <div className="text-[0.5rem] text-gray-600" style={{ fontFamily: 'Space Grotesk' }}>
+                  {monitor.specs.hdr_support}
+                </div>
+              </div>
             </div>
 
             {/* Score bars resumo */}

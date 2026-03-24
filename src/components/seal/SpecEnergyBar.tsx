@@ -67,7 +67,7 @@ export default function SpecEnergyBar({ icon, label, grade, detail, delay = 0 }:
             >
               <div style={{ width: `${barW}px` }} className="flex items-center">
                 <motion.div
-                  className="h-[18px] flex-1 flex items-center justify-center relative overflow-hidden"
+                  className="h-[14px] flex-1 flex items-center justify-center relative overflow-hidden"
                   style={{
                     background: gradient,
                     borderRadius: '3px 0 0 3px',
@@ -102,9 +102,9 @@ export default function SpecEnergyBar({ icon, label, grade, detail, delay = 0 }:
                 {/* Ponta seta 3D */}
                 <div style={{
                   width: 0, height: 0,
-                  borderTop: '9px solid transparent',
-                  borderBottom: '9px solid transparent',
-                  borderLeft: `7px solid ${color}`,
+                  borderTop: '7px solid transparent',
+                  borderBottom: '7px solid transparent',
+                  borderLeft: `5px solid ${color}`,
                   filter: isActive ? `drop-shadow(2px 0 6px ${color}80)` : `drop-shadow(1px 0 1px rgba(0,0,0,0.1))`,
                   transform: isActive ? 'scaleY(1.25)' : 'scaleY(1)',
                   transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
