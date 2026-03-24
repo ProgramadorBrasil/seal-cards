@@ -57,7 +57,7 @@ export default function ProductSealCard({ monitor, index }: Props) {
     >
       <motion.div
         ref={cardRef}
-        className="relative w-[380px] h-[600px] cursor-pointer"
+        className="relative w-[400px] h-[620px] cursor-pointer"
         style={{
           transformStyle: 'preserve-3d',
           rotateX: isFlipped ? 0 : rotateX,
@@ -92,7 +92,7 @@ export default function ProductSealCard({ monitor, index }: Props) {
 
           <div className="relative z-10 h-full flex flex-col">
             {/* Header estilo PROCEL */}
-            <div className="px-4 pt-3 pb-2" style={{ borderBottom: '2px solid #eee' }}>
+            <div className="px-6 pt-4 pb-3" style={{ borderBottom: '2px solid #eee' }}>
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
@@ -139,7 +139,7 @@ export default function ProductSealCard({ monitor, index }: Props) {
             </div>
 
             {/* 9 índices com barras A-G PROCEL */}
-            <div className="px-4 py-2 flex-1 overflow-hidden">
+            <div className="px-6 py-3 flex-1 overflow-hidden">
               <div className="space-y-2">
                 {frontIndices.map((idx, i) => (
                   <SpecEnergyBar
@@ -155,7 +155,7 @@ export default function ProductSealCard({ monitor, index }: Props) {
             </div>
 
             {/* Footer com preço + botão comprar */}
-            <div className="px-4 py-2 mt-auto" style={{ borderTop: '2px solid #eee' }}>
+            <div className="px-6 py-3 mt-auto" style={{ borderTop: '2px solid #eee' }}>
               <div className="flex items-center justify-between">
                 <RecommendBadge categories={monitor.rtings_categories} pickRank={monitor.rtings_pick_rank} />
                 {monitor.price_usd && (
@@ -174,27 +174,33 @@ export default function ProductSealCard({ monitor, index }: Props) {
                 )}
               </div>
 
-              {/* Botão comprar afiliado */}
+              {/* Botão comprar afiliado — 3D glossy Hollywood */}
               {monitor.affiliate_url && (
                 <motion.a
                   href={monitor.affiliate_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 w-full flex items-center justify-center gap-2 py-2 rounded-xl text-[0.6rem] font-bold tracking-[2px] uppercase no-underline"
+                  className="mt-3 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-[0.65rem] font-bold tracking-[2px] uppercase no-underline relative overflow-hidden"
                   style={{
-                    fontFamily: 'Rajdhani',
-                    background: 'linear-gradient(135deg, #FF9900, #FF6600)',
+                    fontFamily: 'Orbitron',
+                    background: 'linear-gradient(180deg, #FFB347 0%, #FF9900 40%, #E88700 100%)',
                     color: '#fff',
-                    boxShadow: '0 3px 12px rgba(255,153,0,0.3)',
+                    boxShadow: '0 4px 15px rgba(255,153,0,0.35), inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.1)',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.2)',
                   }}
-                  whileHover={{ scale: 1.02, boxShadow: '0 5px 20px rgba(255,153,0,0.4)' }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.03, boxShadow: '0 6px 25px rgba(255,153,0,0.5), inset 0 1px 0 rgba(255,255,255,0.5)' }}
+                  whileTap={{ scale: 0.97 }}
                   onClick={(e) => e.stopPropagation()}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1 }}
                 >
-                  🛒 Comprar na Amazon
+                  <span className="relative z-10">🛒 Comprar na Amazon</span>
+                  {/* Brilho glossy animado */}
+                  <motion.div
+                    className="absolute top-0 left-0 right-0 h-[50%] pointer-events-none"
+                    style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.3), transparent)' }}
+                  />
                 </motion.a>
               )}
 

@@ -291,7 +291,7 @@ export default function ProductsPage() {
       <div className="max-w-7xl mx-auto px-6">
         <AnimatePresence mode="popLayout">
           <motion.div className="grid gap-8 justify-items-center"
-            style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))' }} layout>
+            style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))' }} layout>
             {filtered.map((monitor, i) => (
               <motion.div key={monitor.id} layout
                 exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.3 } }}>
