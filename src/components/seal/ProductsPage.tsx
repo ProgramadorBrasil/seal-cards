@@ -8,7 +8,7 @@ const allCategories = Array.from(new Set(monitors.flatMap((m) => m.rtings_catego
 // Spec filter options
 const resolutionOptions = ['Todas', '4K UHD', 'QHD 1440p', 'Ultrawide', '6K+']
 const panelOptions = ['Todos', 'QD-OLED', 'OLED/WOLED', 'Mini LED', 'IPS', 'VA']
-const refreshOptions = ['Todos', '360Hz+', '240Hz+', '144Hz+', '60Hz']
+const refreshOptions = ['Todos', '360Hz+', '240Hz+', '144Hz+', 'Até 75Hz']
 const responseOptions = ['Todos', '< 0.1ms', '< 1ms', '< 5ms']
 
 export default function ProductsPage() {
@@ -28,15 +28,18 @@ export default function ProductsPage() {
       result = result.filter((m) => m.rtings_categories.includes(activeCategory))
     }
 
-    // Search
+    // Search — multi-palavra tokenizada + campos expandidos
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase()
-      result = result.filter(
-        (m) =>
-          m.name.toLowerCase().includes(q) ||
-          m.brand.toLowerCase().includes(q) ||
-          m.specs.panel_type.toLowerCase().includes(q)
-      )
+      const tokens = searchQuery.toLowerCase().split(/\s+/).filter(Boolean)
+      result = result.filter((m) => {
+        const searchable = [
+          m.name, m.brand, m.specs.panel_type,
+          m.specs.resolution_name, m.specs.resolution,
+          `${m.size_inches}"`, `${m.size_inches} polegadas`,
+          `${m.specs.refresh_rate_hz}hz`,
+        ].join(' ').toLowerCase()
+        return tokens.every((t) => searchable.includes(t))
+      })
     }
 
     // Resolution filter
@@ -56,7 +59,7 @@ export default function ProductsPage() {
       result = result.filter((m) => {
         const p = m.specs.panel_type.toLowerCase()
         if (panelFilter === 'QD-OLED') return p.includes('qd-oled')
-        if (panelFilter === 'OLED/WOLED') return (p.includes('oled') || p.includes('woled')) && !p.includes('qd-oled')
+        if (panelFilter === 'OLED/WOLED') return p.includes('woled') || (p.includes('oled') && !p.includes('qd-oled'))
         if (panelFilter === 'Mini LED') return p.includes('mini led')
         if (panelFilter === 'IPS') return p.includes('ips')
         if (panelFilter === 'VA') return p.includes('va') && !p.includes('mini led')
@@ -70,7 +73,7 @@ export default function ProductsPage() {
         if (refreshFilter === '360Hz+') return m.specs.refresh_rate_hz >= 360
         if (refreshFilter === '240Hz+') return m.specs.refresh_rate_hz >= 240
         if (refreshFilter === '144Hz+') return m.specs.refresh_rate_hz >= 144
-        if (refreshFilter === '60Hz') return m.specs.refresh_rate_hz <= 75
+        if (refreshFilter === 'Até 75Hz') return m.specs.refresh_rate_hz <= 75
         return true
       })
     }
@@ -88,7 +91,8 @@ export default function ProductsPage() {
     return result
   }, [activeCategory, searchQuery, resFilter, panelFilter, refreshFilter, responseFilter])
 
-  const hasActiveSpecFilters = resFilter !== 'Todas' || panelFilter !== 'Todos' || refreshFilter !== 'Todos' || responseFilter !== 'Todos'
+  const activeSpecFilterCount = [resFilter !== 'Todas', panelFilter !== 'Todos', refreshFilter !== 'Todos', responseFilter !== 'Todos'].filter(Boolean).length
+  const hasActiveSpecFilters = activeSpecFilterCount > 0
 
   const clearSpecFilters = () => {
     setResFilter('Todas')
@@ -176,7 +180,8 @@ export default function ProductsPage() {
             >
               ⚙️ Filtrar por Especificações
               {hasActiveSpecFilters && (
-                <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+                <span className="min-w-4 h-4 rounded-full bg-red-400 text-white text-[0.45rem] font-bold flex items-center justify-center"
+                  style={{ fontFamily: 'Orbitron' }}>{activeSpecFilterCount}</span>
               )}
             </button>
 
@@ -282,7 +287,7 @@ export default function ProductsPage() {
           <motion.div className="mt-3 text-[0.55rem] tracking-[2px] uppercase text-gray-400 font-bold"
             style={{ fontFamily: 'Rajdhani' }}>
             {filtered.length} {filtered.length === 1 ? 'monitor encontrado' : 'monitores encontrados'}
-            {hasActiveSpecFilters && <span className="text-blue-400 ml-2">· filtros ativos</span>}
+            {hasActiveSpecFilters && <span className="text-blue-400 ml-2">· {activeSpecFilterCount} {activeSpecFilterCount === 1 ? 'filtro ativo' : 'filtros ativos'}</span>}
           </motion.div>
         </div>
       </div>

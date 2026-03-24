@@ -144,22 +144,28 @@ export default function ProductSealCard({ monitor, index }: Props) {
             </div>
 
             {/* Imagem do monitor */}
-            {monitor.image_url && (
-              <motion.div
-                className="px-6 py-2 flex justify-center"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              >
+            <motion.div
+              className="px-6 py-2 flex justify-center"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              {monitor.image_url ? (
                 <img
                   src={monitor.image_url}
                   alt={monitor.name}
                   className="h-24 w-auto object-contain drop-shadow-lg"
                   loading="lazy"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                  onError={(e) => {
+                    const el = e.target as HTMLImageElement
+                    el.style.display = 'none'
+                    el.parentElement!.innerHTML = '<div style="height:96px;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:2rem">🖥️</div>'
+                  }}
                 />
-              </motion.div>
-            )}
+              ) : (
+                <div className="h-24 flex items-center justify-center text-gray-200 text-4xl">🖥️</div>
+              )}
+            </motion.div>
 
             {/* Todos os 18 índices com barras A-G PROCEL */}
             <div className="px-6 py-2">
