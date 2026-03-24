@@ -22,11 +22,17 @@ export default function ProductSealCard({ monitor, index }: Props) {
   const seal = useMemo(() => computeSeal(monitor), [monitor])
   const allIndices = useMemo(() => getSpecIndices(monitor), [monitor])
 
-  // Tilt
+  // Tilt + spotlight
   const mouseX = useMotionValue(0.5)
   const mouseY = useMotionValue(0.5)
-  const rotateX = useSpring(useTransform(mouseY, [0, 1], [6, -6]), { stiffness: 200, damping: 25 })
-  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-6, 6]), { stiffness: 200, damping: 25 })
+  const rotateX = useSpring(useTransform(mouseY, [0, 1], [8, -8]), { stiffness: 200, damping: 25 })
+  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-8, 8]), { stiffness: 200, damping: 25 })
+  // Spotlight follows cursor
+  const spotlightX = useTransform(mouseX, [0, 1], [0, 100])
+  const spotlightY = useTransform(mouseY, [0, 1], [0, 100])
+  // Parallax for image
+  const imgX = useSpring(useTransform(mouseX, [0, 1], [-8, 8]), { stiffness: 150, damping: 20 })
+  const imgY = useSpring(useTransform(mouseY, [0, 1], [-5, 5]), { stiffness: 150, damping: 20 })
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
@@ -83,7 +89,7 @@ export default function ProductSealCard({ monitor, index }: Props) {
           style={{
             backfaceVisibility: 'hidden',
             background: '#ffffff',
-            boxShadow: `0 10px 50px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)`,
+            boxShadow: `0 2px 4px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.06), 0 16px 48px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03)`,
           }}
         >
           {/* Borda animada holográfica */}
@@ -94,6 +100,16 @@ export default function ProductSealCard({ monitor, index }: Props) {
             maskComposite: 'exclude',
             animation: 'borderRotate 3s linear infinite',
           }} />
+
+          {/* Spotlight cursor overlay */}
+          <motion.div className="absolute inset-0 rounded-2xl pointer-events-none z-[2] opacity-[0.06]"
+            style={{
+              background: useTransform(
+                [spotlightX, spotlightY],
+                ([x, y]) => `radial-gradient(circle 200px at ${x}% ${y}%, ${cfg.border}, transparent 70%)`
+              ),
+            }}
+          />
 
           {/* Partículas flutuantes para Lendário/Épico */}
           {particles.map((p, i) => (
@@ -180,9 +196,13 @@ export default function ProductSealCard({ monitor, index }: Props) {
                   alt={monitor.name}
                   className="h-28 w-auto object-contain"
                   loading="lazy"
-                  style={{ filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                  animate={{ y: [0, -4, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{
+                    filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.2))',
+                    x: imgX,
+                    y: imgY,
+                  }}
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
                   onError={(e) => {
                     const el = e.target as HTMLImageElement
                     el.style.display = 'none'
