@@ -91,32 +91,38 @@ export default function ProductSealCard({ monitor, index }: Props) {
           />
 
           <div className="relative z-10 h-full flex flex-col">
-            {/* Header estilo PROCEL */}
-            <div className="px-6 pt-4 pb-3" style={{ borderBottom: '2px solid #eee' }}>
+            {/* Barra colorida topo — identidade PROCEL */}
+            <div className="h-1.5 w-full rounded-t-xl"
+              style={{ background: 'linear-gradient(90deg, #009640, #51B748, #B9D433, #EED600, #FCB814, #F37021, #ED1C24)' }} />
+
+            {/* Header */}
+            <div className="px-6 pt-3 pb-3" style={{ borderBottom: '1.5px solid #eee' }}>
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <h2
-                      className="text-xl font-black tracking-wide"
+                      className="text-lg font-black tracking-[1px]"
                       style={{
                         fontFamily: 'Orbitron',
-                        background: `linear-gradient(90deg, #1a1a2e, ${cfg.border})`,
+                        background: `linear-gradient(135deg, #1a1a2e 30%, ${cfg.border})`,
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
+                        filter: `drop-shadow(0 1px 2px ${cfg.border}15)`,
                       }}
                     >
                       Monitor
                     </h2>
-                    <span className="text-[0.45rem] text-gray-300 px-1.5 py-0.5 rounded bg-gray-50 font-mono">
+                    <span className="text-[0.4rem] text-gray-300 px-1.5 py-0.5 rounded-md font-mono"
+                      style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.04)' }}>
                       #{String(monitor.id).padStart(3, '0')}
                     </span>
                   </div>
-                  <p className="text-[0.45rem] text-gray-400 tracking-[1px] uppercase"
-                    style={{ fontFamily: 'Rajdhani', fontWeight: 600 }}>
+                  <p className="text-[0.42rem] text-gray-400 tracking-[1.5px] uppercase mt-0.5"
+                    style={{ fontFamily: 'Rajdhani', fontWeight: 700 }}>
                     Selo de Eficiência FabIA 2026
                   </p>
                 </div>
-                <ScoreRing score={seal.overall} color={seal.verdictColor} size={56} />
+                <ScoreRing score={seal.overall} color={seal.verdictColor} size={58} label="NOTA" />
               </div>
 
               {/* Fabricante / Modelo */}

@@ -13,30 +13,39 @@ export default function RecommendBadge({ categories, pickRank }: Props) {
     <div className="flex flex-wrap gap-1.5">
       {pickRank === 1 && (
         <motion.span
-          className="px-2 py-0.5 rounded-full text-[0.5rem] tracking-[1px] uppercase font-bold"
+          className="px-2.5 py-0.5 rounded-full text-[0.45rem] tracking-[1px] uppercase font-black relative overflow-hidden"
           style={{
-            fontFamily: 'Rajdhani',
-            background: 'linear-gradient(135deg, rgba(212,136,10,0.12), rgba(255,107,0,0.12))',
-            border: '1px solid rgba(212,136,10,0.3)',
+            fontFamily: 'Orbitron',
+            background: 'linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,0,0.15))',
+            border: '1.5px solid rgba(255,215,0,0.4)',
             color: '#b87a00',
+            boxShadow: '0 2px 8px rgba(255,215,0,0.12)',
           }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8, type: 'spring', stiffness: 300 }}
         >
-          #1 Recomendado
+          <motion.div
+            className="absolute inset-0 opacity-30 pointer-events-none"
+            style={{
+              backgroundImage: 'linear-gradient(110deg, transparent 30%, rgba(255,215,0,0.4) 50%, transparent 70%)',
+              backgroundSize: '200% 100%',
+            }}
+            animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
+          />
+          <span className="relative z-10">#1 Recomendado</span>
         </motion.span>
       )}
       {categories.slice(0, 3).map((cat, i) => (
         <motion.span
           key={cat}
-          className="px-2 py-0.5 rounded-full text-[0.5rem] tracking-[1px] uppercase"
+          className="px-2 py-0.5 rounded-full text-[0.45rem] tracking-[1px] uppercase font-semibold"
           style={{
             fontFamily: 'Rajdhani',
-            fontWeight: 600,
             background: 'rgba(0,136,204,0.06)',
             border: '1px solid rgba(0,136,204,0.15)',
-            color: 'rgba(0,100,160,0.8)',
+            color: 'rgba(0,100,160,0.75)',
           }}
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
