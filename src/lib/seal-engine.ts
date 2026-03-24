@@ -175,7 +175,7 @@ export interface SpecIndex {
 
 export function getSpecIndices(m: Monitor): SpecIndex[] {
   const s = m.specs
-  const indices: SpecIndex[] = [
+  const indices: Omit<SpecIndex, 'grade'>[] = [
     { icon: '🖥️', label: 'Resolução', score: resScore(s.resolution), detail: s.resolution_name },
     { icon: '⚡', label: 'Taxa Hz', score: hzScore(s.refresh_rate_hz), detail: `${s.refresh_rate_hz}Hz` },
     { icon: '🎨', label: 'Painel', score: panelScore(s.panel_type), detail: s.panel_type },
