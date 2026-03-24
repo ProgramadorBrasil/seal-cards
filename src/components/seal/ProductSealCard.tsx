@@ -56,7 +56,7 @@ export default function ProductSealCard({ monitor, index }: Props) {
     >
       <motion.div
         ref={cardRef}
-        className="relative w-[400px] h-[640px] cursor-pointer"
+        className="relative w-[400px] h-[760px] cursor-pointer"
         style={{
           transformStyle: 'preserve-3d',
           rotateX: isFlipped ? 0 : rotateX,
@@ -142,6 +142,24 @@ export default function ProductSealCard({ monitor, index }: Props) {
                 <SealBadge rarity={rarity} verdict={seal.verdict} verdictColor={seal.verdictColor} />
               </div>
             </div>
+
+            {/* Imagem do monitor */}
+            {monitor.image_url && (
+              <motion.div
+                className="px-6 py-2 flex justify-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <img
+                  src={monitor.image_url}
+                  alt={monitor.name}
+                  className="h-24 w-auto object-contain drop-shadow-lg"
+                  loading="lazy"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                />
+              </motion.div>
+            )}
 
             {/* Todos os 18 índices com barras A-G PROCEL */}
             <div className="px-6 py-2">

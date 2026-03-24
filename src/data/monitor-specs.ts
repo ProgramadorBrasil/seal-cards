@@ -110,6 +110,35 @@ const eanMap: Record<number, string> = {
   25: '0195174073391',
 }
 
+// Image URLs (Amazon CDN m.media-amazon.com + fallbacks)
+const imageMap: Record<number, string> = {
+  1: 'https://m.media-amazon.com/images/P/B0DM6SHQTN.01._SCLZZZZZZZ_SX500_.jpg',
+  2: 'https://m.media-amazon.com/images/P/B0F23LR6JQ.01._SCLZZZZZZZ_SX500_.jpg',
+  3: 'https://m.media-amazon.com/images/P/B0C8ZJKPWC.01._SCLZZZZZZZ_SX500_.jpg',
+  4: 'https://m.media-amazon.com/images/P/B0G5R2QK24.01._SCLZZZZZZZ_SX500_.jpg',
+  5: 'https://m.media-amazon.com/images/P/B0F732KMQQ.01._SCLZZZZZZZ_SX500_.jpg',
+  6: 'https://m.media-amazon.com/images/P/B0F6724X5N.01._SCLZZZZZZZ_SX500_.jpg',
+  7: 'https://c1.neweggimages.com/ProductImage/24-011-480-04.png',
+  8: 'https://m.media-amazon.com/images/P/B0D2LXLN75.01._SCLZZZZZZZ_SX500_.jpg',
+  9: 'https://m.media-amazon.com/images/P/B0D1DPFZLZ.01._SCLZZZZZZZ_SX500_.jpg',
+  10: 'https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/aw-series/aw3225qf/media-gallery/monitor-alienware-aw3225qf-white-gallery-1.psd?fmt=jpg&wid=500',
+  11: 'https://m.media-amazon.com/images/P/B0CTS1RQ6Y.01._SCLZZZZZZZ_SX500_.jpg',
+  12: 'https://m.media-amazon.com/images/P/B0G631LBJT.01._SCLZZZZZZZ_SX500_.jpg',
+  13: 'https://m.media-amazon.com/images/P/B0CZSGWLD5.01._SCLZZZZZZZ_SX500_.jpg',
+  14: 'https://m.media-amazon.com/images/P/B0FB46P6F6.01._SCLZZZZZZZ_SX500_.jpg',
+  15: 'https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2725qe/pdp/monitor-u2725qe-hero-image.psd?fmt=jpg&wid=500',
+  16: 'https://m.media-amazon.com/images/P/B0D1TX35MQ.01._SCLZZZZZZZ_SX500_.jpg',
+  17: 'https://m.media-amazon.com/images/P/B0CV26XVMD.01._SCLZZZZZZZ_SX500_.jpg',
+  18: 'https://m.media-amazon.com/images/P/B0D7NSZRJW.01._SCLZZZZZZZ_SX500_.jpg',
+  19: 'https://m.media-amazon.com/images/P/B0CZWM44QP.01._SCLZZZZZZZ_SX500_.jpg',
+  20: 'https://cdn.sanity.io/images/hf5b3axp/production/aa6a0cd061a4b1766a5fa732185d01ba0f6cf2b9-3000x2209.png?w=500&fit=max&auto=format',
+  21: 'https://m.media-amazon.com/images/P/B0CV24GQ9W.01._SCLZZZZZZZ_SX500_.jpg',
+  22: 'https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-mini-led-gaming-monitor-g-pro-27i/pc/c3db76adb923d300eeac0c63407c3a1a.png',
+  23: 'https://m.media-amazon.com/images/P/B0DMPTN8DG.01._SCLZZZZZZZ_SX500_.jpg',
+  24: 'https://m.media-amazon.com/images/P/B0CTSC3VS4.01._SCLZZZZZZZ_SX500_.jpg',
+  25: 'https://m.media-amazon.com/images/P/B0CSGWXVBN.01._SCLZZZZZZZ_SX500_.jpg',
+}
+
 const AFFILIATE_TAG = 'fabia-20'
 
 function getAffiliateUrl(asin: string): string {
@@ -124,6 +153,7 @@ export const monitors: Monitor[] = monitorData.monitors.map((m) => {
     ...m,
     asin: asin || undefined,
     ean: eanMap[m.id] || undefined,
+    image_url: imageMap[m.id] || undefined,
     affiliate_url: asin ? getAffiliateUrl(asin) : undefined,
   }
 })
