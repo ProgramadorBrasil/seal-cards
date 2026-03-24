@@ -24,7 +24,7 @@ export default function RecommendBadge({ categories, pickRank }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
         >
-          #1 RTINGS
+          #1 Recomendado
         </motion.span>
       )}
       {categories.slice(0, 3).map((cat, i) => (

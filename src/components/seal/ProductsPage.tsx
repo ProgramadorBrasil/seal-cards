@@ -327,7 +327,7 @@ export default function ProductsPage() {
           </span>
         </div>
         <p className="text-[0.45rem] tracking-[3px] uppercase text-gray-300" style={{ fontFamily: 'Rajdhani' }}>
-          Dados RTINGS.com + Especificações Fabricantes · 2026
+          Especificações Oficiais dos Fabricantes · 2026
         </p>
       </div>
     </div>

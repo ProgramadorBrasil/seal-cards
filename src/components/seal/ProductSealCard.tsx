@@ -113,7 +113,7 @@ export default function ProductSealCard({ monitor, index }: Props) {
                   </div>
                   <p className="text-[0.45rem] text-gray-400 tracking-[1px] uppercase"
                     style={{ fontFamily: 'Rajdhani', fontWeight: 600 }}>
-                    Selo de Eficiência RTINGS 2026
+                    Selo de Eficiência FabIA 2026
                   </p>
                 </div>
                 <ScoreRing score={seal.overall} color={seal.verdictColor} size={56} />
@@ -200,7 +200,7 @@ export default function ProductSealCard({ monitor, index }: Props) {
 
               <div className="flex items-center justify-between mt-1.5 pt-1" style={{ borderTop: '1px solid #f0f0f0' }}>
                 <div className="text-[0.4rem] text-gray-300 tracking-[1px]" style={{ fontFamily: 'Rajdhani' }}>
-                  RTINGS.COM · DADOS 2026
+                  FABIA SMART CART · 2026
                 </div>
                 <span className="text-[0.4rem] text-gray-300 tracking-[2px] uppercase" style={{ fontFamily: 'Rajdhani' }}>
                   TOQUE P/ MAIS ÍNDICES →
